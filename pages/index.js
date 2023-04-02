@@ -22,9 +22,9 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Solutions Architect (Cloud & DevOps) | youtube.com/@techAshishSinghBaghel</p>
+        <p>Solutions Architect (Cloud & DevOps)</p>
         <p>
-        Digital technologies professional who loves to learn, believes in sharing knowledge, creates tech YouTube videos, speaks in tech conferences / meetup groups. Currently working with one of the major financial services client in Olso Norway, helping in their digitalization journey by leveraging latest technologies, automating business processes and modernizing business applications.
+          Digital technologies professional who loves to learn, believes in sharing knowledge, creates tech YouTube videos, speaks in tech conferences / meetup groups. Currently working with one of the major financial services client in Olso Norway, helping in their digitalization journey by leveraging latest technologies, automating business processes and modernizing business applications.
         </p>
       </section>
 
