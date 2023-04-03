@@ -1,8 +1,12 @@
 import Head from 'next/head';
-import Layout from '../../components/layout';
+import Image from "next/image";
+import Layout from '../../components/layout/layout';
 import Date from '../../components/date';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
+import { MDXRemote } from "next-mdx-remote";
+import YouTube from "../../components/youtube/youtube";
+import "highlight.js/styles/atom-one-dark.css"; //required for rehype plugin to highlight code
 
 export async function getStaticProps({ params }) {
     // Add the "await" keyword like this:
@@ -16,14 +20,14 @@ export async function getStaticProps({ params }) {
   }
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds();
+  const paths = await getAllPostIds();
   return {
     paths,
     fallback: false,
   };
 }
 
-export default function Post({ postData }) {
+export default function Blog({ postData }) {
     return (
       <Layout>
         <Head>
@@ -34,7 +38,8 @@ export default function Post({ postData }) {
           <div className={utilStyles.lightText}>
             <Date dateString={postData.date} />
           </div>
-          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+          {/* <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} /> */}
+          <MDXRemote {...postData.mdxSource} components={{ YouTube, Image }} />
         </article>
       </Layout>
     );
