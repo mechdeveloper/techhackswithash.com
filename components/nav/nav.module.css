@@ -1,0 +1,21 @@
+.nav {
+    /* background-color: rgba(0,0,0,0.3); */
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+}
+
+.nav a {
+    float: right;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    /* background: transparent; */
+    border-radius: 20%;
+    /* color: var(--color-light); */
+    font-size: 1.1rem;
+}
+
+.nav a:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
