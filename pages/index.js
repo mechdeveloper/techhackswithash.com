@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import Layout from '../components/layout/layout';
 import { getSortedPostsData } from '../lib/posts';
+import { BookOpenIcon } from '@heroicons/react/24/solid';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -27,6 +29,14 @@ export default function Home({ allPostsData }) {
           </div>
 
           {/* CTA */}
+          <div className='flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4'>
+            <Link href="/blog">
+              <div className='w-full bg-transparent text-blue-600 px-6 py-3 rounded-md text-lg sm:text-xl border-2 border-blue-600 focus:outline-none whitespace-nowrap flex justify-center items-center space-x-2'>
+                <BookOpenIcon className='w-6 h-6 flex-shrink-0'/>
+                <span>Read the blog</span>
+              </div>
+            </Link>
+          </div>
         </section>
       </Layout>
   )

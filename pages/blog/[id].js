@@ -1,9 +1,7 @@
-import Head from 'next/head';
 import Image from "next/image";
 import Layout from '../../components/layout/layout';
 import Date from '../../components/date';
 import { getAllPostIds, getPostData } from '../../lib/posts';
-import utilStyles from '../../styles/utils.module.css';
 import { MDXRemote } from "next-mdx-remote";
 import YouTube from "../../components/youtube/youtube";
 import "highlight.js/styles/atom-one-dark.css"; //required for rehype plugin to highlight code
@@ -28,19 +26,28 @@ export async function getStaticPaths() {
 }
 
 export default function Blog({ postData }) {
+
+    const pageMeta = {
+      type: 'article',
+      title: postData.title,
+    }
+
     return (
-      <Layout>
-        <Head>
-          <title>{postData.title}</title>
-        </Head>
-        <article>
-          <h1 className={utilStyles.headingXl}>{postData.title}</h1>
-          <div className={utilStyles.lightText}>
+      <Layout pageMeta={pageMeta}>
+        <article className="max-w-screen-lg mx-auto py-12 space-y-16">
+          <header>
+            <h1 className='max-w-screen-md lg:text-6xl md:text-5xl sm: text-4xl'>{postData.title}</h1>
+          </header>
+          <div className='text-gray-500'>
             <Date dateString={postData.date} />
           </div>
-          {/* <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} /> */}
-          <MDXRemote {...postData.mdxSource} components={{ YouTube, Image }} />
+          {/* Author */}
+          <main>
+            <div class="prose dark:prose-invert">
+              <MDXRemote {...postData.mdxSource} components={{ YouTube, Image }} />
+            </div>
+          </main>
         </article>
-      </Layout>
+      </Layout> 
     );
   }

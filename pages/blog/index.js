@@ -1,42 +1,40 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import Date from '../../components/date';
+import Card from '../../components/card/card'
 import Layout, { siteTitle } from '../../components/layout/layout';
-import utilStyles from '../../styles/utils.module.css';
 import { getSortedPostsData } from '../../lib/posts';
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
+
+  try {
+    const allPostsData = await getSortedPostsData();
+
+    return {
+      props: {
+        allPostsData,
+      },
+    };
+  } catch(error) {
+    return {
+      props: {
+        data: []
+      }
+    }
+  }
+
 }
 
-export default function BloPost({ allPostsData }) {
+export default function Blog ({ allPostsData }) {
   return (
-    <Layout blog>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+      <Layout>
+          <section className='text-center pt-12 sm:pt-24 pb-16'>
+            <h1 className='text-4xl sm:text-7xl font-bold capitalize'>
+              Blog Posts
+            </h1>
+          </section>
 
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/blog/${id}`}>{title}</Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-        
-      </section>
-
-    </Layout>
+          <div className='grid sm:grid-cols-1 gap-8 max-w-screen-lg mx-auto'>
+            {allPostsData.map(post => <Card key={allPostsData.id} {...post} />)}
+          </div>
+      </Layout>
   );
-}
+};
+

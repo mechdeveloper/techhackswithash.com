@@ -4,7 +4,9 @@ import Footer from '../sections/Footer'
 import { useRouter } from 'next/router'
 
 const Layout = ({ children, pageMeta }) => {
+  
   const router = useRouter();
+
   const meta={
     title: 'Tech blogs',
     description: 'Tech blogs by Ashish',
@@ -20,7 +22,7 @@ const Layout = ({ children, pageMeta }) => {
         <meta name="description" content={meta.description}></meta>
         <link rel="icon" href='/favicon.ico'></link>
         {/* Open Graph */}
-        <meta property='og:url' content={`http://localhost:3000${router.asPath}`}/>
+        <meta property='og:url' content={`https://techhackswithash.com${router.asPath}`}/>
         <meta property='og:type' content={meta.type}/>
         <meta property='og:site_name' content='techhackswithash'/>
         <meta property='og:description' content={meta.description}/>
