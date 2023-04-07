@@ -14,155 +14,213 @@ Kubernetes Basics
 
 Using [minikube](https://minikube.sigs.k8s.io/docs/start/) to create a single node cluster
 
-![minikube cli screenshot](/img/minikube_cli.png "minikube cli")
-
 Check if minikube is installed
 ------------------------------
 
-    minikube version
+```bash
+minikube version
+```
 
 Start the cluster
 -----------------
 
-    minikube start
+```bash
+minikube start
+```
 
-    minikube status
-
+```bash
+minikube status
+```
 minikube can download the appropriate version of kubectl
 
-    minikube kubectl -- get pods -A
+```bash
+minikube kubectl -- get pods -A
+```
 
 Check if kubectl is installed
 -----------------------------
 
-    kubectl version
+```bash
+kubectl version
+```
 
 Check cluster details
 ---------------------
 
-    kubectl cluster-info
+```bash 
+kubectl cluster-info
+```
 
 View nodes in the cluster
 -------------------------
 
-    kubectl get nodes
+```bash
+kubectl get nodes
+```
 
 Deploy an app
 -------------
 
-    kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+```bash
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+```
 
 List your deployment
 --------------------
 
-    kubectl get deployments
+```bash 
+kubectl get deployments
+```
 
 Check existing pods
 -------------------
 
-    kubectl get pods
+```bash 
+kubectl get pods
+```
 
-    kubectl get pods -o wide
+```bash
+kubectl get pods -o wide
+```
 
 Describe pods
 -------------
 
-    kubectl describe pods
+```bash
+kubectl describe pods
+```
 
 Check logs of a container running in pod
 ----------------------------------------
 
-    kubectl logs $POD_NAME
+```bash 
+kubectl logs $POD_NAME
+```
 
 Execute command directly inside container running in a pod
 ----------------------------------------------------------
 
-    kubectl exec $POD_NAME env
+```bash
+kubectl exec $POD_NAME env
+```
 
 Start a bash session in a pod container
 ---------------------------------------
 
-    kubectl exec -ti $POD_NAME bash
+```bash
+kubectl exec -ti $POD_NAME bash
+```
 
 To close your container connection type `exit`.
 
 List current services from your cluster
 ---------------------------------------
 
-    kubectl get services
+```bash
+kubectl get services
+```
 
 Create a new service and expose it to external traffic with NodePort as paramter
 --------------------------------------------------------------------------------
 
-    kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+```bash 
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+```
 
 Describe a service
 ------------------
 
-    kubectl describe services/kubernetes-bootcamp
+```bash
+kubectl describe services/kubernetes-bootcamp
+```
 
 Test your app on the externally exposed port
 --------------------------------------------
 
-    curl $(minikube ip):$NODE_PORT
+```bash 
+curl $(minikube ip):$NODE_PORT
+```
 
 Note: You can also run following command to check your deployment minikube will start the tunnel for your service and open it in default browser…
 
-    minikube service kubernetes-bootcamp
+```bash 
+minikube service kubernetes-bootcamp
+```
 
 Query list of pods using label
 ------------------------------
 
-    kubectl get pods -l run=kubernetes-bootcamp
+```bash 
+kubectl get pods -l run=kubernetes-bootcamp
+```
 
 Query list of services using label
 ----------------------------------
 
-    kubectl get services -l run=kubernetes-bootcamp
+```bash
+kubectl get services -l run=kubernetes-bootcamp
+```
 
 Apply a new label to the object
 -------------------------------
 
-    kubectl label pod $POD_NAME app=v1
+```bash
+kubectl label pod $POD_NAME app=v1
+```
 
 Deleting a service
 ------------------
 
-    kubectl delete service -l run=kubernetes-bootcamp
+```bash
+kubectl delete service -l run=kubernetes-bootcamp
+```
 
 Scale up the service
 --------------------
 
-    kubectl scale deployments/kubernetes-bootcamp --replicas=4
+```bash 
+kubectl scale deployments/kubernetes-bootcamp --replicas=4
+```
 
 Scale down the service
 ----------------------
 
-    kubectl scale deployments/kubernetes-bootcamp --replicas=2
+```bash 
+kubectl scale deployments/kubernetes-bootcamp --replicas=2
+```
 
 Rolling update, Update the image of your application
 ----------------------------------------------------
 
-    kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+```bash 
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+```
 
 Confirm an update
 -----------------
 
-    kubectl rollout status deployments/kubernetes-bootcamp
+```bash 
+kubectl rollout status deployments/kubernetes-bootcamp
+```
 
 Rollback an update
 ------------------
 
-    kubectl rollout undo deployments/kubernetes-bootcamp
+```bash 
+kubectl rollout undo deployments/kubernetes-bootcamp
+```
 
 Delete a deployment
 -------------------
 
-    kubectl delete deployment kubernetes-bootcamp
+```bash 
+kubectl delete deployment kubernetes-bootcamp
+```
 
 Stop minikube
 -------------
-
-    minikube stop
+```bash 
+minikube stop
+```
 
 * * *

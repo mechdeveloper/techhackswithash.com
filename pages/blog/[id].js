@@ -34,7 +34,7 @@ export default function Blog({ postData }) {
 
     return (
       <Layout pageMeta={pageMeta}>
-        <article className="max-w-screen-lg mx-auto py-12 space-y-16">
+        <div className="max-w-screen-lg mx-auto py-12 space-y-16">
           <header>
             <h1 className='max-w-screen-md lg:text-6xl md:text-5xl sm: text-4xl'>{postData.title}</h1>
           </header>
@@ -43,11 +43,11 @@ export default function Blog({ postData }) {
           </div>
           {/* Author */}
           <main>
-            <div class="prose dark:prose-invert">
+            <article class="prose dark:prose-invert">
               <MDXRemote {...postData.mdxSource} components={{ YouTube, Image }} />
-            </div>
+            </article>
           </main>
-        </article>
+        </div>
       </Layout> 
     );
   }

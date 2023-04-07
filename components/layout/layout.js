@@ -8,8 +8,8 @@ const Layout = ({ children, pageMeta }) => {
   const router = useRouter();
 
   const meta={
-    title: 'Tech blogs',
-    description: 'Tech blogs by Ashish',
+    title: 'Tech hacks with Ash',
+    description: 'Tech blogs by Ashish Singh Baghel',
     type: 'website',
     ...pageMeta,
   };
