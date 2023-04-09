@@ -43,6 +43,9 @@ module.exports = {
             h6: {
               color: theme('colors.gray.100'),
             },
+            th: {
+              color: theme('colors.gray.100'),
+            },
 
             strong: {
               color: theme('colors.gray.100'),
