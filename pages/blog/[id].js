@@ -43,7 +43,7 @@ export default function Blog({ postData }) {
           </div>
           {/* Author */}
           <main>
-            <article class="prose dark:prose-invert">
+            <article class="min-h-screen prose dark:prose-dark sm:prose-lg lg:prose-xl max-w-none">
               <MDXRemote {...postData.mdxSource} components={{ YouTube, Image }} />
             </article>
           </main>
