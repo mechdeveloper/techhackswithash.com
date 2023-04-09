@@ -10,61 +10,79 @@ hero_image_credit_link: "https://unsplash.com/photos/OqtafYT5kTw"
 Windows Server 2016 OS | Docker Host - Cleanup
 ==============================================
 
-![Docker](/img/docker-1583867936176-2300.jpg "Docker")
+{/* ![Docker](/img/docker-1583867936176-2300.jpg "Docker") */}
 
 Step 1: Make sure host is not in swarm mode
 -------------------------------------------
 
-    docker swarm leave --force
+```
+docker swarm leave --force
+```
 
 Step 2: Remove all container networks on the system
 ---------------------------------------------------
 
-    docker network prune -f
+```
+docker network prune -f
+```
 
 Step 3: Remove All containers on the system
 -------------------------------------------
 
-    docker container prune -f
+```
+docker container prune -f
+```
 
 Step 4: Stop docker service
 ---------------------------
 
-    net stop docker  
+```
+net stop docker  
+```
 
 Step 5: Clean up networking components on the container host
 ------------------------------------------------------------
 
-    Get-NetNatStaticMapping | Remove-NetNatStaticMapping
-    Get-NetNat | Remove-NetNat
-    Get-ContainerNetwork | Remove-ContainerNetwork
-    Stop-Service hns 
-    del C:\ProgramData\Microsoft\Windows\HNS\HNS.data
-    Restart-Service hns
+```
+Get-NetNatStaticMapping | Remove-NetNatStaticMapping
+Get-NetNat | Remove-NetNat
+Get-ContainerNetwork | Remove-ContainerNetwork
+Stop-Service hns 
+del C:\ProgramData\Microsoft\Windows\HNS\HNS.data
+Restart-Service hns
+```
 
 Step 6: Change StartupType of docker service to manual
 ------------------------------------------------------
 
-    Get-Service -Name docker | fl *
-    Set-Service -Name docker -StartupType Manual
-    Get-Service -Name docker | fl *
+```
+Get-Service -Name docker | fl *
+Set-Service -Name docker -StartupType Manual
+Get-Service -Name docker | fl *
+```
 
 Step 7: Restart host
 --------------------
 
-    Restart-Computer
+```
+Restart-Computer
+```
 
 Step 8: Change StartupType of docker service to automatic
 ---------------------------------------------------------
 
-    Get-Service -Name docker | fl *
-    Set-Service -Name docker -StartupType Automatic
-    Get-Service -Name docker | fl *
+```
+Get-Service -Name docker | fl *
+Set-Service -Name docker -StartupType Automatic
+Get-Service -Name docker | fl *
+```
 
 Note: You can also remove/uninstall unused/disabled network adapters of Windows Server 2016 OS host from Device Manager
 
 Now your host machine is in clean state and you can start your docker windows service again
 
-    net start docker
+```
+net start docker
+```
 
 * * *

@@ -1,5 +1,5 @@
 ---
-title: "Basic Docker Commands | Images | Containers"
+title: "Basic Docker Commands"
 date: "2019-12-27"
 hero_image: "./ilya-pavlov-OqtafYT5kTw-unsplash.jpg"
 hero_image_alt: "Screen with HTML code in dark mode"
@@ -7,180 +7,177 @@ hero_image_credit_text: "Ilya Pavlov"
 hero_image_credit_link: "https://unsplash.com/photos/OqtafYT5kTw"
 ---
 
-![Docker Image](https://d1.awsstatic.com/acs/characters/Logos/Docker-Logo_Horizontel_279x131.b8a5c41e56b77706656d61080f6a0217a3ba356d.png)
-
-
 # Basic Docker Commands for Images and Containers
 
 Demo for these commands is available in the following YouTube video
 
+<YouTube id="o5kMU9ykFKY" />
+
 1. Check Docker Version
 
-    ```bash
-    docker version
-    ```
+```bash
+docker version
+```
 
 2. Check the detailed information of Docker installed
 
-    ```bash
-    docker info
-    ```
+```bash
+docker info
+```
 
-Docker commands - Images
-------------------------
-
+## Docker commands - Images
 
 3.  Search an image in Docker hub
-    
-    ```bash
-    docker search ubuntu
 
-    docker search `<<imagename>>` | head -20
-    docker search ubuntu | head -20
-    #  will search ubuntu images in the dockerhub and limit the search result to only 20
-    ```
+```bash
+docker search ubuntu
 
-    > Note: head command works on bash terminal, for PowerShell terminal in windows use `select -first 10`
+docker search `<<imagename>>` | head -20
+docker search ubuntu | head -20
+#  will search ubuntu images in the dockerhub and limit the search result to only 20
+```
 
-    ```bash
-    docker search ubuntu | select -first 10
-    ```
+> Note: head command works on bash terminal, for PowerShell terminal in windows use `select -first 10`
+
+```bash
+docker search ubuntu | select -first 10
+```
 
 4.  Pull and Image from Docker hub
 
-    ```bash
-    docker pull imagename
-    docker pull nginx
-    ```
+```bash
+docker pull imagename
+docker pull nginx
+```
 
 5.  Check image history (layers in an image)
 
-    ```bash
-    docker history imagename
-    docker history nginx
-    ```
+```bash
+docker history imagename
+docker history nginx
+```
 
 6.  Pull a specific version of an image
 
-    ```bash 
-    docker pull imagename:versiontag
-    docker pull busybox:1.24
-    ```
+```bash 
+docker pull imagename:versiontag
+docker pull busybox:1.24
+```
 
 7.  Verify Downloaded docker images
 
-    ```bash 
-    docker images
-    ``` 
+```bash 
+docker images
+``` 
 
 8.  Remove Docker images
 
-    ```bash
-    docker rmi `<<imagename>>`
-    docker rmi nginx
-    ```
+```bash
+docker rmi `<<imagename>>`
+docker rmi nginx
+```
 
 9.  Download and run an image in docker container using run command
 
-    ```bash 
-    docker run imagename
-    docker run --name cntnginx -d nginx
-    # --name to specify a name for the running container. In this example, it is cntnginx
-    # -d to run the container in background (detached mode)
-    ```
+```bash 
+docker run imagename
+docker run --name cntnginx -d nginx
+# --name to specify a name for the running container. In this example, it is cntnginx
+# -d to run the container in background (detached mode)
+```
 
-Docker Commands - Containers
-----------------------------
+## Docker Commands - Containers
 
 10.  List running containers
 
-    ```bash 
-    docker ps
-    ```
+```bash 
+docker ps
+```
 
 11.  List all containers (This includes containers in all state)
 
-    ```bash 
-    docker ps -a
-    ```
+```bash 
+docker ps -a
+```
 
 12.  Inspect container object
 
-    ```bash
-    docker inspect containername/containerid
-    docker inspect cntnginx
-    ```
+```bash
+docker inspect containername/containerid
+docker inspect cntnginx
+```
 
 13.  Print the stats for a running container
 
-    ```bash 
-    docker stats containername/containerid
-    docker stats cntnginx
-    ```
+```bash 
+docker stats containername/containerid
+docker stats cntnginx
+```
 
 14.  Pause a running container
 
-    ```bash 
-    docker pause containername/containerid
-    docker pause cntnginx
-    ```
+```bash 
+docker pause containername/containerid
+docker pause cntnginx
+```
 
 15.  Unpause a paused container
 
-    ```bash 
-    docker unpause containername/containerid
-    docker unpause cntnginx
-    ```
+```bash 
+docker unpause containername/containerid
+docker unpause cntnginx
+```
 
 16.  Kill a running container
-    
-    ```bash 
-    docker kill containername/containerid
-    docker kill cntnginx
-    ```
+
+```bash 
+docker kill containername/containerid
+docker kill cntnginx
+```
 
 17.  Start a killed container
 
-    ```bash 
-    docker start containername/containerid
-    docker start cntnginx
-    ```
+```bash 
+docker start containername/containerid
+docker start cntnginx
+```
 
 18.  Stop a running container
 
-    ```bash 
-    docker stop containername/containerid
-    docker stop cntnginx
-    ```
+```bash 
+docker stop containername/containerid
+docker stop cntnginx
+```
 
 19.  Delete a container
 
-    ```bash 
-    docker rm containername/containerid
-    docker rm cntnginx
-    ```
+```bash 
+docker rm containername/containerid
+docker rm cntnginx
+```
 
 20.  To remove all stopped containers
 
-    ```bash 
-    docker container prune
-    ```
+```bash 
+docker container prune
+```
 
 21.  Export a container as an image (`.tar` file)
 
-    ```bash
-    docker export containername/contianerid -o filename.tar
-    docker run --name newnginxcontainer -d nginx
-    docker export newnginxcontainer -o test.tar
-    ```
+```bash
+docker export containername/contianerid -o filename.tar
+docker run --name newnginxcontainer -d nginx
+docker export newnginxcontainer -o test.tar
+```
 
-    > Note: You must have permissions on the folder where you are saving the test.tar
-     use `chmod 777 ./` for permissions in case if you are facing an permission denied error.
-    
+> Note: You must have permissions on the folder where you are saving the test.tar
+    use `chmod 777 ./` for permissions in case if you are facing an permission denied error.
+
 22.  Import an exported container image (.tar file)
 
-    ```bash 
-    docker import remoteurl/imagename.tar
-    docker import test.tar
-    ``` 
+```bash 
+docker import remoteurl/imagename.tar
+docker import test.tar
+``` 
 
+* * *
