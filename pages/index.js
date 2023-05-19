@@ -24,7 +24,7 @@ export default function Home({ allPostsData }) {
               <span className='block'>by Ashish Singh Baghel</span>
             </h1>
             <h2 className='text-xl sm:text-2xl'>
-              Cloud, DevOps, Azure, Serverless, Containers and Secuirty
+              Cloud, DevOps, Azure, Serverless, Containers, Secuirty ...
             </h2>
           </div>
 
