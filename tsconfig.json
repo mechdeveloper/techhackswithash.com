@@ -22,14 +22,16 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "target": "ES2020"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "pages/blog/index.js"  ],
+    ".next/types/**/*.ts",
+    "pages/blog/index.js"
+  ],
   "exclude": [
     "node_modules"
   ]
