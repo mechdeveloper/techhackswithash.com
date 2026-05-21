@@ -5,6 +5,7 @@ import config from '../../lib/config';
 const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/blog', label: 'Blog' },
+  { href: '/videos', label: 'Videos' },
   { href: '/speaking', label: 'Speaking' },
 ];
 

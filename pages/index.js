@@ -1,9 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/layout/layout';
 import Card from '../components/card/card';
 import { getSortedPostsData } from '../lib/posts';
 import { BookOpenIcon, ArrowRightIcon, MicrophoneIcon } from '@heroicons/react/24/solid';
 import config from '../lib/config';
+
+const featuredVideoIds = ['xj9OiJL56pM', 'NdZlgq8D8oE', '0pNZ2UWkPfQ'];
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -90,6 +93,41 @@ export default function Home({ allPostsData }) {
         <div className="grid grid-cols-1 gap-6">
           {recentPosts.map((post) => (
             <Card key={post.id} {...post} />
+          ))}
+        </div>
+      </section>
+
+      {/* Videos teaser */}
+      <section className="mb-24">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold">Videos</h2>
+          <Link
+            href="/videos"
+            className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            View all <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {featuredVideoIds.map((id) => (
+            <Link key={id} href="/videos" className="block group">
+              <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-900">
+                <Image
+                  src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
+                  alt="Video thumbnail"
+                  fill
+                  className="object-cover group-hover:opacity-80 transition-opacity"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-red-600/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <svg className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
