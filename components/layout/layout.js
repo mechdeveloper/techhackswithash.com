@@ -2,14 +2,15 @@ import Head from 'next/head';
 import Header from '../sections/Header'
 import Footer from '../sections/Footer'
 import { useRouter } from 'next/router'
+import config from '../../lib/config';
 
 const Layout = ({ children, pageMeta }) => {
-  
+
   const router = useRouter();
 
-  const meta={
-    title: 'Tech hacks with Ash',
-    description: 'Tech blogs by Ashish Singh Baghel',
+  const meta = {
+    title: config.siteName,
+    description: config.siteDescription,
     type: 'website',
     ...pageMeta,
   };
@@ -22,9 +23,9 @@ const Layout = ({ children, pageMeta }) => {
         <meta name="description" content={meta.description}></meta>
         <link rel="icon" href='/favicon.ico'></link>
         {/* Open Graph */}
-        <meta property='og:url' content={`https://techhackswithash.com${router.asPath}`}/>
+        <meta property='og:url' content={`${config.siteUrl}${router.asPath}`}/>
         <meta property='og:type' content={meta.type}/>
-        <meta property='og:site_name' content='techhackswithash'/>
+        <meta property='og:site_name' content={config.siteName}/>
         <meta property='og:description' content={meta.description}/>
         <meta property='og:title' content={meta.title}/>
         {meta.date && (

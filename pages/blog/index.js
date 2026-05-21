@@ -1,5 +1,5 @@
 import Card from '../../components/card/card'
-import Layout, { siteTitle } from '../../components/layout/layout';
+import Layout from '../../components/layout/layout';
 import { getSortedPostsData } from '../../lib/posts';
 
 export async function getStaticProps() {
@@ -15,7 +15,7 @@ export async function getStaticProps() {
   } catch(error) {
     return {
       props: {
-        data: []
+        allPostsData: []
       }
     }
   }
