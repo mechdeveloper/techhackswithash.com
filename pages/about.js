@@ -127,16 +127,16 @@ export default function About() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-6">My Story</h2>
           <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
             <p>
-              I started as a Mechanical Engineer — not writing code, but managing procurement for construction projects. But I was always drawn to computers, and in 2014 I made the leap: joining Tata Consultancy Services as a .NET developer, teaching myself to build software from the ground up.
+              I graduated as a Mechanical Engineer, but computers were always my real passion. While my degree was in mechanical systems, I spent every spare moment tinkering with technology — it was only a matter of time before I made it my career. In 2014 I joined <strong className="text-gray-800 dark:text-gray-200">Tata Consultancy Services</strong> as a Systems Engineer Trainee, where I discovered .NET development and found exactly what I wanted to do with my life.
             </p>
             <p>
-              Four years of full-stack development taught me how enterprise systems are built. Then in 2018, an opportunity came to move to <strong className="text-gray-800 dark:text-gray-200">Oslo, Norway</strong> and lead DevOps transformation for one of Europe&apos;s largest banks. I spent six years there modernizing mission-critical financial infrastructure — building container platforms, overhauling CI/CD pipelines, and migrating legacy workloads to Linux-based containerized environments using Podman and Docker.
+              Four years of full-stack development taught me how large-scale enterprise systems are built and operated. Then in 2018, an opportunity came to move to <strong className="text-gray-800 dark:text-gray-200">Oslo, Norway</strong> and lead DevOps transformation for one of Europe&apos;s largest banks. I spent six years there modernising mission-critical financial infrastructure — building container platforms, overhauling CI/CD pipelines, and migrating legacy workloads to Linux-based containerised environments using Podman and Docker.
             </p>
             <p>
-              Back in Mumbai since 2024, I&apos;m now a <strong className="text-gray-800 dark:text-gray-200">Cloud Solution Architect</strong> at TCS, leading cloud modernization programs on Microsoft Azure. I&apos;ve migrated 11 business-critical applications to Azure, built CI/CD systems that cut deployment time by half, and delivered platforms that support thousands of users.
+              Back in Mumbai since 2024, I&apos;m now a <strong className="text-gray-800 dark:text-gray-200">Cloud Solution Architect</strong> at TCS, leading cloud modernisation programs on Microsoft Azure. I&apos;ve migrated 11 business-critical applications to Azure, built CI/CD systems that cut deployment time by half, and delivered platforms that support thousands of users.
             </p>
             <p>
-              I write on this blog to document what I learn, share practical knowledge with the community, and hopefully save someone a few hours of debugging. I also speak at conferences when I get the chance — because the best way to learn something deeply is to explain it to others.
+              I love working with the latest technologies — whether that&apos;s exploring a new Azure service, experimenting with AI tooling, or containerising something that was never meant to be containerised. This blog is where I document what I learn, share practical knowledge with the community, and hopefully save someone a few hours of debugging. I also speak at conferences when I get the chance — because the best way to understand something deeply is to explain it to others.
             </p>
           </div>
         </section>
