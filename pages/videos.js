@@ -3,59 +3,6 @@ import Image from 'next/image';
 import Layout from '../components/layout/layout';
 import config from '../lib/config';
 
-const videos = [
-  {
-    id: 'xj9OiJL56pM',
-    title: 'Verified Commits on GitHub from Windows PC (GPG Keys)',
-    description:
-      'How to set up GPG key signing for Git commits on a Windows PC so your commits show as Verified on GitHub.',
-    tags: ['GitHub', 'Git', 'Security', 'Windows'],
-  },
-  {
-    id: 'sHyZipgbYAo',
-    title: 'Docker Engine Enterprise on Windows Server 2019 VM',
-    description:
-      'Beginner-friendly walkthrough of installing and running Docker Engine Enterprise on a Windows Server 2019 virtual machine.',
-    tags: ['Docker', 'Windows Containers', 'Windows Server'],
-  },
-  {
-    id: 'JZXtYTILxIQ',
-    title: 'Remote Management of Docker Host over TCP Encrypted with TLS',
-    description:
-      'Secure remote management of a Docker host over TCP by encrypting the connection with TLS certificates — practical security for container infrastructure.',
-    tags: ['Docker', 'Windows Containers', 'TLS', 'Security'],
-  },
-  {
-    id: 'isBTdCFU9I4',
-    title: 'Install Windows Server 2022 VM on Windows 10 using VirtualBox',
-    description:
-      'Step-by-step guide to creating a Windows Server 2022 virtual machine on a Windows 10 host using Oracle VirtualBox.',
-    tags: ['Windows Server', 'VirtualBox', 'Virtualization'],
-  },
-  {
-    id: 'NdZlgq8D8oE',
-    title: 'Azure Serverless Containers | Azure Container Instances via Docker CLI',
-    description:
-      'Complete hands-on guide to deploying serverless containers on Azure using Azure Container Instances, controlled entirely through the Docker CLI.',
-    tags: ['Azure', 'Containers', 'Serverless', 'ACI'],
-  },
-  {
-    id: '0pNZ2UWkPfQ',
-    title: 'GitHub Codespaces for Azure with Terraform Cloud',
-    description:
-      'Use GitHub Codespaces as a cloud development environment to deploy and manage Azure infrastructure with Terraform Cloud — no local setup required.',
-    tags: ['GitHub Codespaces', 'Terraform', 'Azure', 'IaC'],
-  },
-  {
-    id: 'REDg2uIqDcc',
-    title: 'Containers as Development Environments',
-    description:
-      'Live session exploring how containers can be used as consistent, reproducible development environments — eliminating "works on my machine" forever.',
-    tags: ['Containers', 'DevEx', 'Docker'],
-    isLive: true,
-  },
-];
-
 function VideoCard({ id, title, description, tags, isLive }) {
   const [playing, setPlaying] = useState(false);
   const thumbnail = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
@@ -123,7 +70,7 @@ function VideoCard({ id, title, description, tags, isLive }) {
   );
 }
 
-export default function Videos() {
+export default function Videos({ videos }) {
   return (
     <Layout
       pageMeta={{
@@ -163,12 +110,67 @@ export default function Videos() {
 
       {/* Video grid */}
       <section className="max-w-6xl mx-auto pb-24">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videos.map((video) => (
-            <VideoCard key={video.id} {...video} />
-          ))}
-        </div>
+        {videos.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {videos.map((video) => (
+              <VideoCard key={video.id} {...video} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-500 dark:text-gray-400 py-16">
+            Videos coming soon.{' '}
+            <a href={config.social.youtube} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">
+              Watch on YouTube
+            </a>
+          </p>
+        )}
       </section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const API_KEY = process.env.YOUTUBE_API_KEY;
+  const HANDLE = 'techAshishSinghBaghel';
+
+  try {
+    // Get uploads playlist ID for the channel
+    const channelRes = await fetch(
+      `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle=${HANDLE}&key=${API_KEY}`
+    );
+    const channelData = await channelRes.json();
+    const uploadsPlaylistId = channelData.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+    if (!uploadsPlaylistId) throw new Error('Uploads playlist not found');
+
+    // Fetch latest 12 videos from uploads playlist
+    const playlistRes = await fetch(
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=12&key=${API_KEY}`
+    );
+    const playlistData = await playlistRes.json();
+    const videoIds = (playlistData.items || [])
+      .map((item) => item.snippet.resourceId.videoId)
+      .join(',');
+    if (!videoIds) throw new Error('No videos found');
+
+    // Fetch full details and statistics, sort by view count
+    const videosRes = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoIds}&key=${API_KEY}`
+    );
+    const videosData = await videosRes.json();
+
+    const videos = (videosData.items || [])
+      .sort((a, b) => Number(b.statistics.viewCount || 0) - Number(a.statistics.viewCount || 0))
+      .map((video) => ({
+        id: video.id,
+        title: video.snippet.title,
+        description: (video.snippet.description.split('\n')[0] || '').slice(0, 200),
+        tags: (video.snippet.tags || []).slice(0, 4),
+        isLive: video.snippet.liveBroadcastContent === 'live',
+      }));
+
+    return { props: { videos }, revalidate: 86400 };
+  } catch (err) {
+    console.error('YouTube API error:', err.message);
+    return { props: { videos: [] }, revalidate: 3600 };
+  }
 }
