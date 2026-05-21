@@ -30,6 +30,8 @@ export default function Blog({ postData }) {
     const pageMeta = {
       type: 'article',
       title: postData.title,
+      description: postData.excerpt || postData.title,
+      date: postData.date,
     }
 
     return (
