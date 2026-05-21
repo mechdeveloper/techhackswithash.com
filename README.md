@@ -1,5 +1,5 @@
 [![Open in Dev Container](https://img.shields.io/static/v1?label=Dev%20Container&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/mechdeveloper/techhackswithash.com.git)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mechdeveloper/techhackswithash.com)
+[![Deploy with Vercel](https://img.shields.io/badge/Deploy%20with-Vercel-black?logo=vercel)](https://vercel.com/new/clone?repository-url=https://github.com/mechdeveloper/techhackswithash.com)
 
 # techhackswithash.com
 
@@ -77,25 +77,25 @@ posts/
 
 Start the file with a YAML frontmatter block:
 
-```mdx
+````mdx
 ---
 title: "My Post Title"
 date: "2026-05-21"
 excerpt: "A short description shown on the blog listing page."
 ---
 
-Your content here. Supports standard Markdown, GitHub Flavored Markdown (tables, task lists), and JSX components.
+Your content here. Supports Markdown, GFM (tables, task lists), and JSX components.
 
 ## Code blocks are syntax highlighted
 
-\`\`\`bash
+```bash
 echo "hello world"
-\`\`\`
+```
 
 ## Embed a YouTube video
 
 <YouTube id="VIDEO_ID" />
-```
+````
 
 The post will be picked up automatically on the next build — no registration needed.
 
