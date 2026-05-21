@@ -31,8 +31,13 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm">
-      <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-6">
-        <Logo />
+      <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center">
+        {/* Left — takes equal space to balance the right side */}
+        <div className="flex-1">
+          <Logo />
+        </div>
+
+        {/* Center — nav sits in the true middle */}
         <nav className="hidden sm:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
           {navLinks.map(({ href, label }) => (
             <Link
@@ -44,7 +49,9 @@ const Header = () => {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
+
+        {/* Right — flex-1 + justify-end mirrors the left side width */}
+        <div className="flex-1 flex justify-end items-center">
           {renderThemeChanger()}
         </div>
       </div>
