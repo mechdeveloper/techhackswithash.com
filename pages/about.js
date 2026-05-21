@@ -1,6 +1,7 @@
 import Layout from '../components/layout/layout';
 import SocialLinks from '../components/social/SocialIcons';
 import Link from 'next/link';
+import Image from 'next/image';
 import config from '../lib/config';
 
 const experience = [
@@ -108,8 +109,15 @@ export default function About() {
     >
       {/* Hero */}
       <section className="py-16 sm:py-24 text-center">
-        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-2xl font-bold mb-6 shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/50">
-          ASB
+        <div className="inline-block w-24 h-24 rounded-full mb-6 shadow-lg ring-4 ring-blue-100 dark:ring-blue-900/50 overflow-hidden">
+          <Image
+            src="/profile.jpeg"
+            alt={config.author}
+            width={96}
+            height={96}
+            className="object-cover w-full h-full"
+            priority
+          />
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold mb-2">{config.author}</h1>
         <p className="text-lg text-blue-600 dark:text-blue-400 font-medium mb-1">{config.authorTitle}</p>
