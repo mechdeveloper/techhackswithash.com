@@ -79,24 +79,6 @@ export default function Home({ allPostsData }) {
         ))}
       </section>
 
-      {/* Latest posts */}
-      <section className="mb-24">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold">Latest Posts</h2>
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            View all <ArrowRightIcon className="w-4 h-4" />
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 gap-6">
-          {recentPosts.map((post) => (
-            <Card key={post.id} {...post} />
-          ))}
-        </div>
-      </section>
-
       {/* Videos teaser */}
       <section className="mb-24">
         <div className="flex items-center justify-between mb-8">
@@ -128,6 +110,24 @@ export default function Home({ allPostsData }) {
                 </div>
               </div>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Latest posts */}
+      <section className="mb-24">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold">Latest Posts</h2>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            View all <ArrowRightIcon className="w-4 h-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 gap-6">
+          {recentPosts.map((post) => (
+            <Card key={post.id} {...post} />
           ))}
         </div>
       </section>
