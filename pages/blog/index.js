@@ -31,7 +31,7 @@ export default function Blog ({ allPostsData }) {
             </h1>
           </section>
 
-          <div className='grid sm:grid-cols-1 gap-8 max-w-screen-lg mx-auto'>
+          <div className='grid grid-cols-1 gap-6 sm:gap-8 max-w-screen-lg mx-auto pb-8'>
             {allPostsData.map(post => <Card key={post.id} {...post} />)}
           </div>
       </Layout>
