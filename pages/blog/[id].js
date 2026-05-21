@@ -4,9 +4,7 @@ import Date from '../../components/date';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import { MDXRemote } from "next-mdx-remote";
 import YouTube from "../../components/youtube/youtube";
-import "highlight.js/styles/atom-one-dark.css"; //required for rehype plugin to highlight code
-// import ReactMarkdown from 'react-markdown'
-// import remarkGfm from 'remark-gfm'
+import "highlight.js/styles/atom-one-dark.css";
 
 export async function getStaticProps({ params }) {
     // Add the "await" keyword like this:
@@ -47,7 +45,6 @@ export default function Blog({ postData }) {
           <main>
             <article className="min-h-screen prose dark:prose-dark sm:prose-lg lg:prose-xl max-w-none">
               <MDXRemote {...postData.mdxSource} components={{ YouTube, Image }} />
-              {/* <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ YouTube, Image }}>{postData.content}</ReactMarkdown> */}
             </article>
           </main>
         </div>

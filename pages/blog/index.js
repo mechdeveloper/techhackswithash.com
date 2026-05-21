@@ -1,5 +1,5 @@
 import Card from '../../components/card/card'
-import Layout, { siteTitle } from '../../components/layout/layout';
+import Layout from '../../components/layout/layout';
 import { getSortedPostsData } from '../../lib/posts';
 
 export async function getStaticProps() {
@@ -15,7 +15,7 @@ export async function getStaticProps() {
   } catch(error) {
     return {
       props: {
-        data: []
+        allPostsData: []
       }
     }
   }
@@ -31,7 +31,7 @@ export default function Blog ({ allPostsData }) {
             </h1>
           </section>
 
-          <div className='grid sm:grid-cols-1 gap-8 max-w-screen-lg mx-auto'>
+          <div className='grid grid-cols-1 gap-6 sm:gap-8 max-w-screen-lg mx-auto pb-8'>
             {allPostsData.map(post => <Card key={post.id} {...post} />)}
           </div>
       </Layout>

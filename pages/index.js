@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Layout from '../components/layout/layout';
 import { getSortedPostsData } from '../lib/posts';
 import { BookOpenIcon } from '@heroicons/react/24/solid';
+import config from '../lib/config';
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -19,9 +20,9 @@ export default function Home({ allPostsData }) {
         <section className="flex flex-col justify-center items-center space-y-10 mt-12 sm:mt-24 md:mt-32">
           {/* Headlines */}
           <div className='space-y-4 max-w-4xl mx-auto text-center'>
-            <h1 className='text-4xl sm:text-7xl font-bold'> 
+            <h1 className='text-4xl sm:text-7xl font-bold'>
               <span className='block'>Tech Blogs</span>
-              <span className='block'>by Ashish Singh Baghel</span>
+              <span className='block'>by {config.author}</span>
             </h1>
             <h2 className='text-xl sm:text-2xl'>
               Artificial Intelligence, Machine Learning, Cloud, DevOps, Azure, Serverless, Containers, Security ...
