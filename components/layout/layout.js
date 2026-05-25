@@ -28,6 +28,8 @@ const Layout = ({ children, pageMeta }) => {
         <meta name="description" content={meta.description} />
         <link rel="canonical" href={canonicalUrl} />
         <link rel="icon" href='/favicon.ico' />
+        <link rel="alternate" type="application/rss+xml" title={config.siteName} href={`${config.siteUrl}/rss.xml`} />
+        <link rel="sitemap" type="application/xml" href={`${config.siteUrl}/sitemap.xml`} />
 
         {/* Open Graph */}
         <meta property="og:url" content={canonicalUrl} />
