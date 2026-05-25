@@ -15,14 +15,21 @@ export async function getStaticProps() {
 
 export default function Blog({ allPostsData }) {
   const [query, setQuery] = useState('');
+  const [activeTag, setActiveTag] = useState('');
 
-  const filtered = query.trim()
-    ? allPostsData.filter(
-        (post) =>
-          post.title?.toLowerCase().includes(query.toLowerCase()) ||
-          post.excerpt?.toLowerCase().includes(query.toLowerCase())
-      )
-    : allPostsData;
+  const allTags = [...new Set(allPostsData.flatMap((p) => p.tags || []))].sort();
+
+  const filtered = allPostsData.filter((post) => {
+    const matchesQuery =
+      !query.trim() ||
+      post.title?.toLowerCase().includes(query.toLowerCase()) ||
+      post.excerpt?.toLowerCase().includes(query.toLowerCase()) ||
+      post.tags?.some((t) => t.toLowerCase().includes(query.toLowerCase()));
+    const matchesTag = !activeTag || post.tags?.includes(activeTag);
+    return matchesQuery && matchesTag;
+  });
+
+  const isFiltered = query.trim() || activeTag;
 
   return (
     <Layout
@@ -35,7 +42,7 @@ export default function Blog({ allPostsData }) {
         <h1 className="text-4xl sm:text-7xl font-bold capitalize mb-8">Blog Posts</h1>
 
         {/* Search */}
-        <div className="relative max-w-lg mx-auto">
+        <div className="relative max-w-lg mx-auto mb-6">
           <svg
             className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
             fill="none"
@@ -64,9 +71,38 @@ export default function Blog({ allPostsData }) {
           )}
         </div>
 
-        {query && (
-          <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-            {filtered.length} result{filtered.length !== 1 ? 's' : ''} for &ldquo;{query}&rdquo;
+        {/* Tag chips */}
+        {allTags.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setActiveTag(activeTag === tag ? '' : tag)}
+                className={`px-3 py-1 text-xs rounded-full border transition-colors ${
+                  activeTag === tag
+                    ? 'bg-blue-600 text-white border-blue-600'
+                    : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500'
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {isFiltered && (
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            {filtered.length} result{filtered.length !== 1 ? 's' : ''}
+            {activeTag && <> tagged <strong className="text-gray-700 dark:text-gray-300">{activeTag}</strong></>}
+            {query && activeTag && ' matching '}
+            {query && <> &ldquo;{query}&rdquo;</>}
+            {' — '}
+            <button
+              onClick={() => { setQuery(''); setActiveTag(''); }}
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              clear
+            </button>
           </p>
         )}
       </section>
@@ -76,7 +112,13 @@ export default function Blog({ allPostsData }) {
           filtered.map((post) => <Card key={post.id} {...post} />)
         ) : (
           <p className="text-center text-gray-500 dark:text-gray-400 py-12">
-            No posts match &ldquo;{query}&rdquo;
+            No posts found.{' '}
+            <button
+              onClick={() => { setQuery(''); setActiveTag(''); }}
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Clear filters
+            </button>
           </p>
         )}
       </div>
