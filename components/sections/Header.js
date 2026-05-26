@@ -32,19 +32,21 @@ const Header = () => {
     if (!mounted) return <div className="w-5 h-5" />;
     const currentTheme = theme === 'system' ? systemTheme : theme;
     return currentTheme === 'dark' ? (
-      <SunIcon
-        className="w-5 h-5 cursor-pointer text-gray-400 hover:text-yellow-400 transition-colors"
-        role="button"
+      <button
+        className="select-none p-1 text-gray-400 hover:text-yellow-400 transition-colors"
         aria-label="Switch to light mode"
         onClick={() => setTheme('light')}
-      />
+      >
+        <SunIcon className="w-5 h-5" />
+      </button>
     ) : (
-      <MoonIcon
-        className="w-5 h-5 cursor-pointer text-gray-400 hover:text-blue-600 transition-colors"
-        role="button"
+      <button
+        className="select-none p-1 text-gray-400 hover:text-blue-600 transition-colors"
         aria-label="Switch to dark mode"
         onClick={() => setTheme('dark')}
-      />
+      >
+        <MoonIcon className="w-5 h-5" />
+      </button>
     );
   };
 
@@ -74,7 +76,7 @@ const Header = () => {
           {renderThemeChanger()}
           {/* Hamburger — mobile only */}
           <button
-            className="sm:hidden p-1 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            className="sm:hidden select-none p-1 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >

@@ -141,7 +141,7 @@ export default function Speaking() {
             href={config.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-blue-600 font-medium hover:bg-blue-50 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white dark:bg-white/90 text-blue-600 font-medium hover:bg-blue-50 dark:hover:bg-white transition-colors"
           >
             Get in touch on LinkedIn
           </a>

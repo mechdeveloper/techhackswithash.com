@@ -4,12 +4,12 @@ import Date from '../../components/date';
 export default function Card(props) {
   return (
     <Link href={`/blog/${props.id}`} className="block min-w-0 group">
-      <div className="rounded-md border dark:border-gray-700 dark:bg-gray-800 p-6 hover:shadow-xl transition-shadow h-full flex flex-col">
+      <div className="rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 hover:shadow-xl transition-shadow h-full flex flex-col">
         <h3 className="text-xl sm:text-2xl font-bold leading-snug tracking-tight mb-2 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
           {props?.title || 'Untitled'}
         </h3>
 
-        <div className="flex items-center gap-2 text-sm mb-3 text-gray-500">
+        <div className="flex items-center gap-2 text-sm mb-3 text-gray-500 dark:text-gray-400">
           <Date dateString={props.date} />
           {props.readingTime && (
             <>

@@ -143,7 +143,7 @@ export default function Home({ allPostsData }) {
         </p>
         <Link
           href="/speaking"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-blue-600 font-medium hover:bg-blue-50 transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white dark:bg-white/90 text-blue-600 font-medium hover:bg-blue-50 dark:hover:bg-white transition-colors"
         >
           View my talks <ArrowRightIcon className="w-4 h-4" />
         </Link>
