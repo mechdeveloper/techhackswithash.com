@@ -7,6 +7,7 @@ const staticRoutes = [
   { path: '/blog', priority: '0.9', changefreq: 'weekly' },
   { path: '/videos', priority: '0.7', changefreq: 'weekly' },
   { path: '/speaking', priority: '0.7', changefreq: 'monthly' },
+  { path: '/contact', priority: '0.6', changefreq: 'yearly' },
 ];
 
 function generateSitemap(posts) {

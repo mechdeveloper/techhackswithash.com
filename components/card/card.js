@@ -9,10 +9,14 @@ export default function Card(props) {
           {props?.title || 'Untitled'}
         </h3>
 
-        <div className="text-sm mb-3">
-          <small className="text-gray-500">
-            <Date dateString={props.date} />
-          </small>
+        <div className="flex items-center gap-2 text-sm mb-3 text-gray-500">
+          <Date dateString={props.date} />
+          {props.readingTime && (
+            <>
+              <span>·</span>
+              <span>{props.readingTime} min read</span>
+            </>
+          )}
         </div>
 
         <p className="text-gray-500 dark:text-gray-400 text-sm flex-1 line-clamp-2">

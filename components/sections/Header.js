@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/blog', label: 'Blog' },
   { href: '/videos', label: 'Videos' },
   { href: '/speaking', label: 'Speaking' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 const Header = () => {
